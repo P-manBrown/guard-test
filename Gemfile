@@ -59,6 +59,7 @@ group :development do
   gem "rubocop-rails", "~> 2.15", require: false
   gem "rubocop-rspec", "~> 2.11", require: false
 
+  gem "rails-env"
 end
 
 
