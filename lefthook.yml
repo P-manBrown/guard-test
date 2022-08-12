@@ -1,17 +1,19 @@
 pre-commit:
   commands:
-    rubocop:
+    rubocop-correct:
       glob: "*.rb"
-      run: "rubocop -A --auto-gen-config --force-exclusion {staged_files}"
+      run: rubocop -A --force-exclusion {staged_files} || exit 0
 pre-push:
   parallel: true
-  scripts:
-    "rubocop.sh":
-      runner: bash
-  bundle:
+  commands:
+    rubocop-check:
+      files: git show --name-only HEAD
+      glob: "*.rb"
+      run: bundle exec rubocop --force-exclusion {files} || exit 0
+    rspec:
       files: git show --name-only HEAD
       glob: "{spec/**/*.rb}"
-      run: bundle exec rspec {files}
+      run: bundle exec rspec {files} || exit 0
 post-merge:
   parallel: true
   commands:

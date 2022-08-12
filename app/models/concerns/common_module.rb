@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CommonModule
   extend ActiveSupport::Concern
 
@@ -17,14 +19,17 @@ module CommonModule
     # 名前 必須入力 最大16文字
     validates :name, presence: true, length: { maximum: 16 }
 
-    # メールアドレス 必須入力 最大64文字 メールアドレスの形式 重複メールアドレスは不可 
-    validates :mail, presence: true, length: { maximum: 64 }, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }
+    # メールアドレス 必須入力 最大64文字 メールアドレスの形式 重複メールアドレスは不可
+    validates :mail, presence: true, length: { maximum: 64 },
+                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }
 
     # 年齢 必須入力 数値 整数のみ 0〜100歳
-    validates :age, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+    validates :age, presence: true,
+                    numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
     # 満足度 必須入力 数値 整数のみ 1〜3 (1:悪い 2:普通 3:良い)
-    validates :score, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 3 }
+    validates :score, presence: true,
+                      numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 3 }
 
     # 意見や要望 任意入力 最大150文字
     validates :request, length: { maximum: 150 }
@@ -46,15 +51,15 @@ module CommonModule
   # @return [String] 良い、悪いなどの満足度
   #
   def view_score
-    case self.score
+    case score
     when SCORE_BAD
-      I18n.t('common.score.bad')
+      I18n.t("common.score.bad")
     when SCORE_NORMAL
-      I18n.t('common.score.normal')
+      I18n.t("common.score.normal")
     when SCORE_GOOD
-      I18n.t('common.score.good')
+      I18n.t("common.score.good")
     else
-      I18n.t('common.score.unknown')
+      I18n.t("common.score.unknown")
     end
   end
 end

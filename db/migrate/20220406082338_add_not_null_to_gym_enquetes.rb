@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddNotNullToGymEnquetes < ActiveRecord::Migration[5.2]
   def up
     change_column_null :gym_enquetes, :name, false

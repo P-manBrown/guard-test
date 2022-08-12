@@ -1,4 +1,6 @@
-require_relative 'boot'
+# frozen_string_literal: true
+
+require_relative "boot"
 
 require "rails"
 # Pick the frameworks you want:
@@ -30,11 +32,9 @@ module RspecTechpit2
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-
     config.time_zone = "Tokyo"
     config.active_record.default_timezone = :local
 
     config.i18n.default_locale = :ja
-
   end
 end

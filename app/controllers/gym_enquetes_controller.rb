@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class GymEnquetesController < ApplicationController
-  before_action :set_gym_enquete, only: [:show, :edit, :update, :destroy]
+  before_action :set_gym_enquete, only: %i[show edit update destroy]
 
   # GET /gym_enquetes
   def index
@@ -7,8 +9,7 @@ class GymEnquetesController < ApplicationController
   end
 
   # GET /gym_enquetes/1
-  def show
-  end
+  def show; end
 
   # GET /gym_enquetes/new
   def new
@@ -16,15 +17,16 @@ class GymEnquetesController < ApplicationController
   end
 
   # GET /gym_enquetes/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /gym_enquetes
   def create
     @gym_enquete = GymEnquete.new(gym_enquete_params)
 
     if @gym_enquete.save
-      redirect_to @gym_enquete, notice: I18n.t('successes.submit', name: @gym_enquete.model_name.human)
+      redirect_to @gym_enquete,
+                  notice: I18n.t("successes.submit",
+                                 name: @gym_enquete.model_name.human)
     else
       render :new
     end
@@ -33,7 +35,9 @@ class GymEnquetesController < ApplicationController
   # PATCH/PUT /gym_enquetes/1
   def update
     if @gym_enquete.update(gym_enquete_params)
-      redirect_to @gym_enquete, notice: I18n.t('successes.update', name: @gym_enquete.model_name.human)
+      redirect_to @gym_enquete,
+                  notice: I18n.t("successes.update",
+                                 name: @gym_enquete.model_name.human)
     else
       render :edit
     end
@@ -42,7 +46,9 @@ class GymEnquetesController < ApplicationController
   # DELETE /gym_enquetes/1
   def destroy
     @gym_enquete.destroy
-    redirect_to gym_enquetes_url, notice: I18n.t('successes.destroy', name: @gym_enquete.model_name.human)
+    redirect_to gym_enquetes_url,
+                notice: I18n.t("successes.destroy",
+                               name: @gym_enquete.model_name.human)
   end
 
   private
@@ -53,6 +59,7 @@ class GymEnquetesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def gym_enquete_params
-      params.require(:gym_enquete).permit(:name, :mail, :age, :course_id, :score, :request, :present_id)
+      params.require(:gym_enquete).permit(:name, :mail, :age, :course_id,
+                                          :score, :request, :present_id)
     end
 end
