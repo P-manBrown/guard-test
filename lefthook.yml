@@ -11,7 +11,7 @@ pre-push:
       glob: "*.rb"
       run: bundle exec rubocop --force-exclusion {files} || exit 0
     rspec:
-      files: git show --name-only HEAD
+      files: git diff --name-only origin/$(git symbolic-ref --short HEAD)..HEAD
       glob: "{spec/**/*.rb}"
       run: bundle exec rspec {files} || exit 0
 post-merge:
