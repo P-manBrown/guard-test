@@ -7,7 +7,7 @@ pre-push:
   parallel: true
   commands:
     rubocop-check:
-      files: git show --name-only HEAD
+      files: git diff --name-only origin/$(git symbolic-ref --short HEAD)..HEAD
       glob: "*.rb"
       run: bundle exec rubocop --force-exclusion {files} || exit 0
     rspec:
@@ -18,7 +18,7 @@ post-merge:
   parallel: true
   commands:
     bundle:
-      files: git diff --name-only HEAD $(git symbolic-ref --short HEAD)
+      files: git diff --name-only HEAD~..origin/$(git symbolic-ref --short HEAD)
       glob: "{Gemfile,Gemfile.lock}"
       run: bundle check || bundle install && yard gems
     migrate:
