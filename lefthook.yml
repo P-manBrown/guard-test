@@ -1,0 +1,26 @@
+pre-commit:
+  commands:
+    rubocop:
+      glob: "*.rb"
+      run: "rubocop -A --auto-gen-config --force-exclusion {staged_files}"
+pre-push:
+  parallel: true
+  scripts:
+    "rubocop.sh":
+      runner: bash
+  bundle:
+      files: git show --name-only HEAD
+      glob: "{spec/**/*.rb}"
+      run: bundle exec rspec {files}
+post-merge:
+  parallel: true
+  commands:
+    bundle:
+      files: git diff --name-only HEAD $(git symbolic-ref --short HEAD)
+      glob: "{Gemfile,Gemfile.lock}"
+      run: bundle check || bundle install && yard gems
+    migrate:
+      files: git diff --name-only HEAD $(git symbolic-ref --short HEAD)
+      glob: "{db/migrate/*}"
+      run: rails db:migrate && rails db:test:prepare
+

@@ -1,0 +1,73 @@
+:analyzers:
+  :commit_author_capitalization:
+    :enabled: true
+    :severity: :error
+  :commit_author_email:
+    :enabled: true
+    :severity: :error
+  :commit_author_name:
+    :enabled: true
+    :severity: :error
+    :minimum: 1
+  :commit_body_bullet:
+    :enabled: false
+  :commit_body_bullet_capitalization:
+    :enabled: false
+  :commit_body_bullet_delimiter:
+    :enabled: false
+  :commit_body_tracker_shorthand:
+    :enabled: false
+  :commit_body_leading_line:
+    :enabled: false
+  :commit_body_line_length:
+    :enabled: false
+  :commit_body_paragraph_capitalization:
+    :enabled: false
+  :commit_body_phrase:
+    :enabled: false
+  :commit_body_presence:
+    :enabled: false
+  :commit_body_single_bullet:
+    :enabled: false
+  :commit_subject_length:
+    :enabled: true
+    :severity: :error
+    :maximum: 72
+  :commit_subject_prefix:
+    :enabled: true
+    :severity: :error
+    :delimiter: ": "
+    :includes:
+      - build
+      - chore
+      - ci
+      - docs
+      - feat
+      - fix
+      - format
+      - perf
+      - refactor
+      - revert
+      - test
+      - ui
+      - wip
+  :commit_subject_suffix:
+    :enabled: false
+  :commit_trailer_collaborator_capitalization:
+    :enabled: true
+    :severity: :error
+  :commit_trailer_collaborator_duplication:
+    :enabled: true
+    :severity: :error
+  :commit_trailer_collaborator_email:
+    :enabled: true
+    :severity: :error
+  :commit_trailer_collaborator_key:
+    :enabled: true
+    :severity: :error
+    :includes:
+      - "Co-Authored-By"
+  :commit_trailer_collaborator_name:
+    :enabled: true
+    :severity: :error
+    :minimum: 1

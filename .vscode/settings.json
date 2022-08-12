@@ -1,0 +1,11 @@
+{
+  // Remote-Containersで複数の環境を立ち上げられるか確認。
+  // できなければ対応策を検討。（例：モノレポ化、全部ボリュームに入れるのをやめる）
+  // lefthookがホスト側で使用できるか確認する。
+  // できない場合にはプロジェクトディレクトリにgemがインストールされるように設定を変更する。
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#d3000040",
+    "titleBar.activeForeground": "#ffffff"
+  },
+  "liveServer.settings.port": 5501,
+}

@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "rdbg",
+      "name": "Debug current file with rdbg",
+      "request": "launch",
+      "script": "${file}",
+      "askParameters": false,
+    },
+    {
+      "name": "Start rails server",
+      "type": "rdbg",
+      "request": "launch",
+      "command": "",
+      "script": "${workspaceFolder}/bin/rails",
+      "args": ["s", "-p 3001"],
+    }
+  ],
+}

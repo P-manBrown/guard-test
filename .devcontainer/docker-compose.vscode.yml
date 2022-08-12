@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./.devcontainer/vscode.Dockerfile
+    volumes:
+      - gems:/usr/local/bundle
+      - solargraph-yard:/home/ruby/.yard
+      - bashlog:/home/ruby/bashlog
+      - vscode-extensions:/home/ruby/.vscode-server/extensions
+    command: /bin/sh -c "while sleep 1000; do :; done"
+volumes:
+  gems:
+  solargraph-yard:
+  bashlog:
+  vscode-extensions:

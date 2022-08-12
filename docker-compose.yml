@@ -1,0 +1,34 @@
+version: '${COMPOSE_VER}'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+      secrets:
+        - github-pkg-cred
+    command: bash -c "rm -f /myapp-backend/tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    restart: on-failure
+    volumes:
+      - .:/myapp-backend
+      - public-data:/myapp-backend/public
+      - tmp-data:/myapp-backend/tmp
+    environment:
+      - RAILS_ENV=${APP_ENV}
+    ports:
+      - "${API_PORT}:3000"
+secrets:
+  github-pkg-cred:
+    file: ./docker/api/github-pkg-cred.txt
+volumes:
+  mysql_data:
+  public-data:
+    driver_opts:
+      type: none
+      device: ${PWD}/public
+      o: bind
+  tmp-data:
+     driver_opts:
+      type: none
+      device: ${PWD}/tmp
+      o: bind
+
