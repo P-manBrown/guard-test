@@ -2,7 +2,7 @@ pre-commit:
   commands:
     rubocop-correct:
       glob: "*.rb"
-      run: rubocop -A --force-exclusion {staged_files} || exit 0
+      run: rubocop --autocorrect-all --force-exclusion {staged_files} || exit 0
 pre-push:
   parallel: true
   commands:
@@ -12,7 +12,7 @@ pre-push:
       run: bundle exec rubocop --force-exclusion {files} || exit 0
     rspec:
       files: git diff --name-only origin/$(git symbolic-ref --short HEAD)..HEAD
-      glob: "{spec/**/*.rb}"
+      glob: "spec/**/*.rb"
       run: bundle exec rspec {files} || exit 0
 post-merge:
   parallel: true
@@ -23,6 +23,5 @@ post-merge:
       run: bundle check || bundle install && yard gems
     migrate:
       files: git diff --name-only HEAD $(git symbolic-ref --short HEAD)
-      glob: "{db/migrate/*}"
+      glob: "db/migrate/*"
       run: rails db:migrate && rails db:test:prepare
-
