@@ -13,4 +13,4 @@ if [ $? != 0 ] ; then
 else
   sed -i "s/# inherit_from:/inherit_from:/g" ./.rubocop.yml
 fi
-glkasmglekragjklrklagjkmr
+glkasmglekragjklrklagjkmrgeoaigjio
